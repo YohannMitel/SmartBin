@@ -30,6 +30,7 @@ const props = defineProps({
 });
 
 // Reference for the DOM container
+
 const threeContainer = ref(null);
 const hoveredLidName = ref('')
 let renderer, scene, camera, binModel, binMaterial, hoveredObject, mouse, raycaster, binClosedRotation, controllersModels = [];
