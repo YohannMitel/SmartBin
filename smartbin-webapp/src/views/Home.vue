@@ -76,7 +76,9 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <iframe src="/grafana?orgId=1&from=1734319162742&to=1734340762742&timezone=browser&theme=light&panelId=1&__feature.dashboardSceneSolo" width="450" height="200" frameborder="0"></iframe>
+              <iframe
+                src="/grafana?orgId=1&from=now-40s&to=now&timezone=browser&theme=light&panelId=1&__feature.dashboardSceneSolo"
+                width="450" height="200" frameborder="0"></iframe>
 
             </div>
 
@@ -111,7 +113,7 @@ const settings = QuickSettings.create(0, 0, 'Dev tools');
 const modal = ref(null)
 const modalInstance = ref(null)
 
-
+let socket;
 
 onMounted(() => {
   modalInstance.value = new Modal(modal.value, {
@@ -140,10 +142,38 @@ onMounted(() => {
     }
   );
 
+  // Initialize WebSocket connection
+  socket = new WebSocket('ws://192.168.43.159:8090');
+
+  socket.onopen = () => {
+    console.log('WebSocket connection opened');
+    //socket.send('Votre message ici');
+  };
+
+  socket.onmessage = (event) => {
+    console.log('WebSocket message received:', event.data);
+    data
+    openState.value = event.data === "true";
+
+    // Handle incoming messages
+  };
+
+  socket.onclose = () => {
+    console.log('WebSocket connection closed');
+  };
+
+  socket.onerror = (error) => {
+    console.error('WebSocket error:', error);
+  };
+
+
 })
 
 onUnmounted(() => {
   settings.destroy();
+  if (socket) {
+        socket.close();
+      }
 })
 
 </script>

@@ -26,6 +26,7 @@ export default defineConfig({
     proxy: {
       // Proxy all requests to '/api' to another server
       '/grafana': {
+      
         target: `http://192.168.43.229:3000/d-solo/be5aloxll4s1sd/smartbin-monitoring`, // The URL of the remote server
         changeOrigin: true, // Necessary to change the "Host" header to the target URL
         rewrite: (path) => path.replace(/^\/grafana/, ''), // Rewrite the path if needed
