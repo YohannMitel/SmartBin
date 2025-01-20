@@ -93,7 +93,7 @@ onMounted(() => {
   // Load the main model (bin)
   const loader = new GLTFLoader();
   const modelPath = '/smartbin_3d/bin/model.glb'; // Replace with actual bin model path
-  const controllersPath = ['/smartbin_3d/lid/bincontroller.glb', '/smartbin_3d/lid/lockercontroller.glb']; // Replace with actual controllers model path
+  const controllersPath = ['/smartbin_3d/lid/bincontroller.glb', '/smartbin_3d/lid/lockercontroller.glb', '/smartbin_3d/lid/weightcontroller.glb']; // Replace with actual controllers model path
 
   loader.load(modelPath, (gltf) => {
     binModel = gltf.scene;
